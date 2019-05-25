@@ -2,7 +2,7 @@
 <html lang="ja" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>テキスト中央寄せ</title>
+    <title>文字列の中央寄せと右寄せ</title>
     <script language="javascript" type="text/javascript">
     function centralAlignment() {
       var max=0;
@@ -70,14 +70,46 @@
       }
       document.getElementById("out_textarea").value = result;
     }
+    function rightalAlignment() {
+      var max=0;
+      var text = document.getElementById("textarea").value;
+      var s_text = text.split(/\n/);
+      var x =0;
+      var result = "";
+      //最大文字数
+      for(var i=0;i<s_text.length;i++){
+        if(max<s_text[i].length){
+          max = s_text[i].length;
+        }
+      }
+      //変形
+      for(var i=0;i<s_text.length;i++){
+        var t = s_text[i];
+        var count = (max-t.length);
+        for(var n=0; n<count;n++){
+          if(i==0 && count>0 && n==0){
+            result = result + "。";
+          }else{
+            result = result + "　";
+          }
+        }
+        result = result +t;
+        for(var n=0; n<count;n++){
+            result = result + "　";
+        }
+        result = result + "\n";
+      }
+      document.getElementById("out_textarea").value = result;
+    }
     </script>
   </head>
   <body>
     <h1 style="text-align:center;">文字列中央寄せ</h1>
     <p>全角文字列を中央寄せします。<br/>下のボックスに文字列を入れてボタンを押すと、最大文字数の列に合わせて中央寄せをした文字列を返します。</p>
     <textarea id="textarea" rows="8" cols="50"></textarea>
-    <button type="button" name="button" onclick="centralAlignment();">文字間スペースあり</button>
-    <button type="button" name="button" onclick="centralAlignmentNone();">文字間スペースなし</button>
+    <button type="button" name="button" onclick="centralAlignment();">中央寄せ(文字間あり)</button>
+    <button type="button" name="button" onclick="centralAlignmentNone();">中央寄せ(文字間なし)</button>
+    <button type="button" name="button" onclick="rightalAlignment();">右寄せ</button>
     <textarea id="out_textarea" rows="8" cols="50"></textarea>
     </div>
   </body>
