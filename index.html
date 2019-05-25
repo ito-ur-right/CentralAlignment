@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>テキスト中央寄せ</title>
+    <script language="javascript" type="text/javascript">
+    function centralAlignment() {
+      var max=0;
+      var text = document.getElementById("textarea").value;
+      var s_text = text.split(/\n/);
+      var x =0;
+      var result = "";
+      //最大文字数
+      for(var i=0;i<s_text.length;i++){
+        if(max<s_text[i].length){
+          max = s_text[i].length;
+        }
+      }
+      //変形
+      for(var i=0;i<s_text.length;i++){
+        var t = s_text[i];
+        var padding = "";
+        var count = max-t.length;
+        for(var n=0; n<count;n++){
+          if(i==0 && count>0 && n==0){
+            result = result + "。";
+          }else{
+            result = result + "　";
+          }
+        }
+        t = t.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\s\S]|^$/g).filter(Boolean);
+
+        result = result+padding;
+        for(var j=0;j<t.length;j++){
+          result = result + t[j]+"　";
+        }
+        for(var n=0; n<count;n++){
+            result = result + "　";
+        }
+        result = result + padding + "\n";
+      }
+      document.getElementById("textarea").value = result;
+    }
+    </script>
+  </head>
+  <body>
+    <h1 style="text-align:center;">文字列中央寄せ</h1>
+    <p>下のボックスに複数行の文字列を入れると、最大文字数の列に合わせて中央寄せをしてくれます。</p>
+    <textarea id="textarea" name="name" rows="8" cols="80"></textarea>
+    <button type="button" name="button" onclick="centralAlignment();">中央寄せする</button>
+    <div id="result">
+
+    </div>
+  </body>
+</html>
