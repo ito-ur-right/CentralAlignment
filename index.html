@@ -62,8 +62,7 @@
             result = result + "　";
           }
         }
-        t = t.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\s\S]|^$/g).filter(Boolean);
-
+        result = result +t;
         for(var n=0; n<count;n++){
             result = result + "　";
         }
